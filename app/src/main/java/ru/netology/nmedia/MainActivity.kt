@@ -64,7 +64,6 @@ class MainActivity : AppCompatActivity() {
             //обработка нажатия на кнопку Нравится
             like?.setOnClickListener {
                 post.likedByMe = !post.likedByMe
-                println("Liked")
                 like.setImageResource(
                     if (post.likedByMe) R.drawable.ic_baseline_favorite_24 else R.drawable.ic_baseline_favorite_border_24
                 )
