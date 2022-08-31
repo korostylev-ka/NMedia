@@ -55,9 +55,9 @@ class MainActivity : AppCompatActivity() {
             author.text = post.author
             published.text = post.published
             content.text = post.content
-            likes.text = post.likes.toString()
-            shares.text = post.shares.toString()
-            views.text = post.views.toString()
+            likes.text = PostService.showValues(post.likes)
+            shares.text = PostService.showValues(post.shares)
+            views.text = PostService.showValues(post.views)
             if (post.likedByMe) {
                 like?.setImageResource(R.drawable.ic_baseline_favorite_24)
             }
