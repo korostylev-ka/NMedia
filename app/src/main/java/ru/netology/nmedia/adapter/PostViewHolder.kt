@@ -10,7 +10,8 @@ import ru.netology.nmedia.repository.PostRepositoryInMemoryImpl
 
 class PostViewHolder(
     private val binding: CardPostBinding,
-    private val onLikeListener: (Post) -> Unit, //слушатель
+    private val onLikeListener: OnLikeListener,
+    private val onShareListener: OnShareListener,
 ) : RecyclerView.ViewHolder(binding.root) {
     //обновляет элемент
     fun bind(post: Post) {
@@ -27,27 +28,10 @@ class PostViewHolder(
             like.setOnClickListener {
                 onLikeListener(post)
             }
-        }
-    }
-
-}
-
-class PostViewHolderShare(
-    private val binding: CardPostBinding,
-    private val onShareListener: (Post) -> Unit, //слушатель
-) : RecyclerView.ViewHolder(binding.root) {
-    //обновляет элемент
-    fun bindShare(post: Post) {
-        with(binding) {
-            author.text = post.author
-            published.text = post.published
-            content.text = post.content
-            likes.text = PostRepositoryInMemoryImpl.PostService.showValues(post.likes)
-            shares.text = PostRepositoryInMemoryImpl.PostService.showValues(post.shares)
-            views.text = PostRepositoryInMemoryImpl.PostService.showValues(post.views)
             share.setOnClickListener {
                 onShareListener(post)
             }
+
         }
     }
 }
