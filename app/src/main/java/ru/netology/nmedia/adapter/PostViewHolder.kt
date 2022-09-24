@@ -2,16 +2,28 @@
 
 package ru.netology.nmedia.adapter
 
+import android.view.View
+import android.view.ViewGroup
+import android.widget.PopupMenu
+import androidx.constraintlayout.widget.Group
 import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.R
+import ru.netology.nmedia.databinding.ActivityMainBinding
 import ru.netology.nmedia.databinding.CardPostBinding
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.repository.PostRepositoryInMemoryImpl
 
+interface OnInteractionListener {
+    fun edit(post: Post)
+    fun like(post: Post)
+    fun remove(post: Post)
+    fun share(post: Post)
+
+}
+
 class PostViewHolder(
     private val binding: CardPostBinding,
-    private val onLikeListener: OnLikeListener,
-    private val onShareListener: OnShareListener,
+    private val listener: OnInteractionListener
 ) : RecyclerView.ViewHolder(binding.root) {
     //обновляет элемент
     fun bind(post: Post) {
@@ -26,12 +38,33 @@ class PostViewHolder(
                 if (post.likedByMe) R.drawable.ic_baseline_favorite_24 else R.drawable.ic_baseline_favorite_border_24
             )
             like.setOnClickListener {
-                onLikeListener(post)
+                listener.like(post)
             }
             share.setOnClickListener {
-                onShareListener(post)
+                listener.share(post)
+            }
+            menu.setOnClickListener {
+                PopupMenu(it.context, it).apply {
+                    inflate(R.menu.options_post)
+                    setOnMenuItemClickListener {item ->
+                        when (item.itemId) {
+                            R.id.remove -> {
+                                listener.remove(post)
+                                true
+                            }
+                            R.id.edit -> {
+                                listener.edit(post)
+                                true
+                            }
+                            else -> false
+                        }
+
+                    }
+                }.show()
             }
 
         }
     }
+
 }
+
