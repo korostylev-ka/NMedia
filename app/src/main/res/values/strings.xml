@@ -9,4 +9,10 @@
     <string name="likes_value" translatable="false">100</string>
     <string name="shares_value" translatable="false">2</string>
     <string name="views_value" translatable="false">3000</string>
+    <string name="description_post_like">Like</string>
+    <string name="post_text">Post text</string>
+    <string name="error_empty_content">Content cannot be empty</string>
+    <string name="edit">Edit</string>
+    <string name="remove">Remove</string>
+    <string name="cancel">Cancel</string>
 </resources>
