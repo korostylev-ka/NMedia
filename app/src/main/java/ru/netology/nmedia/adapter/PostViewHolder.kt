@@ -31,12 +31,10 @@ class PostViewHolder(
             author.text = post.author
             published.text = post.published
             content.text = post.content
-            likes.text = PostRepositoryInMemoryImpl.PostService.showValues(post.likes)
-            shares.text = PostRepositoryInMemoryImpl.PostService.showValues(post.shares)
+            like.text = PostRepositoryInMemoryImpl.PostService.showValues(post.likes)
+            share.text = PostRepositoryInMemoryImpl.PostService.showValues(post.shares)
             views.text = PostRepositoryInMemoryImpl.PostService.showValues(post.views)
-            like.setImageResource(
-                if (post.likedByMe) R.drawable.ic_baseline_favorite_24 else R.drawable.ic_baseline_favorite_border_24
-            )
+            like.isChecked = post.likedByMe
             like.setOnClickListener {
                 listener.like(post)
             }

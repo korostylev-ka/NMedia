@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <style name="Widget.Nmedia.LikeButton"
+        parent="Widget.MaterialComponents.Button.TextButton.Icon">
+        <item name="iconTint">@color/button_like</item>
+    </style>
+    <style name="Widget.Nmedia.ShareButton"
+        parent="Widget.MaterialComponents.Button.TextButton.Icon">
+        <item name="iconTint">@color/button_share</item>
+    </style>
+    <style name="Widget.Nmedia.MoreVertButton"
+        parent="Widget.MaterialComponents.Button.TextButton.Icon">
+        <item name="iconTint">@color/purple_500</item>
+
+    </style>
+
+
+</resources>
