@@ -29,10 +29,6 @@ class MainActivity : AppCompatActivity() {
         val bindingPost = ActivityEditPostBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val viewModel: PostViewModel by viewModels()
-        //группа, содержащая текущеее значение контента(текст + кнопка очистки)
-        val group = findViewById<Group>(R.id.group_old)
-        //строка, содержащая текущеее значение контента
-        val textOld = findViewById<EditText>(R.id.content_edit)
 
         //регистрируем контракт? 2-й аргумент - обработчик полученного результата(текста поста)
         val activityLauncher = registerForActivityResult(NewPostActivity.Contract) {text ->

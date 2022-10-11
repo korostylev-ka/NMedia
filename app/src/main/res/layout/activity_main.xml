@@ -29,46 +29,5 @@
         android:contentDescription="@string/add_post"/>
 
 
-
-    <EditText
-        android:id="@+id/content_old"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:inputType="textMultiLine"
-        android:background="@android:color/transparent"
-        android:padding="8dp"
-        android:importantForAutofill="no"
-        app:layout_constraintBottom_toTopOf="@id/content"
-        app:layout_constraintEnd_toStartOf="@id/button_cancel"
-        app:layout_constraintStart_toStartOf="parent"
-        />
-
-    <ImageButton
-        android:id="@+id/button_cancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:layout_marginTop="0dp"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/cancel"
-        app:layout_constraintTop_toBottomOf="@id/lists"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/content_old"
-        app:layout_constraintTop_toTopOf="@id/content_old"
-        app:layout_constraintBottom_toBottomOf="@id/content_old"
-
-        app:srcCompat="@drawable/ic_baseline_cancel_24"
-        />
-
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/group_old"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:constraint_referenced_ids="content_old,button_cancel"
-        android:visibility="invisible">
-
-
-    </androidx.constraintlayout.widget.Group>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
 
