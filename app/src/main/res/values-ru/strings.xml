@@ -13,4 +13,6 @@
     <string name="edit">Редактировать</string>
     <string name="remove">Удалить</string>
     <string name="cancel">Отменить</string>
+    <string name="chooser_share_post">Поделиться постом</string>
+    <string name="add_post">Добавить пост</string>
 </resources>

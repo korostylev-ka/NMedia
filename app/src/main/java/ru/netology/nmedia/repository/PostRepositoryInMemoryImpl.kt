@@ -37,7 +37,8 @@ class PostRepositoryInMemoryImpl: PostRepository {
             999,
             999_999,
             1_500_000,
-            false
+            false,
+            video = "https://www.youtube.com/watch?v=WhWc3b3KhnY"
         )
     )
 
