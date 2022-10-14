@@ -36,6 +36,7 @@ class MainActivity : AppCompatActivity() {
             viewModel.changeContent(text)
             viewModel.save()
         }
+
         val editLauncher = registerForActivityResult(EditPostActivity.ContractEdit) {text ->
             text ?: return@registerForActivityResult
             viewModel.changeContent(text)
@@ -52,8 +53,8 @@ class MainActivity : AppCompatActivity() {
 
             override fun edit(post: Post) {
                 viewModel.edit(post)
-                editLauncher.launch()
-                editText = post.content
+                //запуск активити с интентом по текущему контенту
+                editLauncher.launch(post.content)
 
             }
 
@@ -81,7 +82,6 @@ class MainActivity : AppCompatActivity() {
             //интент на просмотр видео
             override fun openVideo(post: Post) {
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(post.video))
-                intent.setDataAndType(Uri.parse(post.video), "text/plain")
                 val videoIntent = Intent.createChooser(intent, "Video")
                 startActivity(videoIntent)
             }
