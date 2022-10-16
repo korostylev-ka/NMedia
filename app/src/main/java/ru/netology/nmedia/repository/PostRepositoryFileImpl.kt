@@ -57,6 +57,7 @@ class PostRepositoryFileImpl(private val context: Context): PostRepository {
             context.openFileInput(filename).bufferedReader().use{
                 posts = gson.fromJson(it, type)
                 data.value = posts
+                sync()
             }
         } else {
             sync()
@@ -73,6 +74,7 @@ class PostRepositoryFileImpl(private val context: Context): PostRepository {
     override fun removeById(postId: Long) {
         posts = posts.filter { it.id != postId }
         data.value = posts
+        sync()
     }
     override fun likeById(id: Long) {
         //проходим по коллекции, проверяем есть ли пост с данным id
@@ -83,6 +85,7 @@ class PostRepositoryFileImpl(private val context: Context): PostRepository {
         }
         //обновляем livedata(получаем новые данные где подписались)
         data.value = posts
+        sync()
     }
     override fun shareById(id: Long) {
         posts = posts.map{
@@ -91,6 +94,7 @@ class PostRepositoryFileImpl(private val context: Context): PostRepository {
             }
         }
         data.value = posts
+        sync()
 
     }
     override fun save(post: Post) {
@@ -103,6 +107,7 @@ class PostRepositoryFileImpl(private val context: Context): PostRepository {
                 )
             ) + posts
             data.value = posts
+            sync()
             return
         }
         posts = posts.map {
@@ -113,5 +118,6 @@ class PostRepositoryFileImpl(private val context: Context): PostRepository {
             }
         }
         data.value = posts
+        sync()
     }
 }
