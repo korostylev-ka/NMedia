@@ -44,30 +44,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.EditPostFragment"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".activity.NewPostFragment"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".activity.ViewPostFragment"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".activity.AppActivity"
             android:exported="true">
             <nav-graph android:value="@navigation/nav_main"/>
