@@ -47,7 +47,6 @@ class PostRepositoryFileImpl(private val context: Context): PostRepository {
     private val gson = Gson()
     private val filename = "post.json"
     private val type = TypeToken.getParameterized(List::class.java, Post::class.java).type
-    //private var posts = emptyList<Post>()
 
     private val data = MutableLiveData(posts)
 
@@ -87,6 +86,7 @@ class PostRepositoryFileImpl(private val context: Context): PostRepository {
         data.value = posts
         sync()
     }
+
     override fun shareById(id: Long) {
         posts = posts.map{
             if (it.id != id) it else {

@@ -7,20 +7,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/content_edit"
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/edit"
+        android:text=""
+        android:hint="Post text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="top"
-        android:hint=""
-        android:inputType="textMultiLine"
-        android:background="@android:color/transparent"
-        android:padding="8dp"
-        android:importantForAutofill="no"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        />
-
+        android:gravity="start|top"
+        android:inputType="textMultiLine">
+    </com.google.android.material.textfield.TextInputEditText>
 
     <com.google.android.material.bottomappbar.BottomAppBar
         style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
@@ -39,4 +34,4 @@
         android:contentDescription="@string/add_post"/>
 
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>

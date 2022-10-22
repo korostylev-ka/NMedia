@@ -4,58 +4,53 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
-import android.widget.Toast
 import androidx.activity.result.launch
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.Group
+import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.setFragmentResult
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import ru.netology.nmedia.R
 import ru.netology.nmedia.adapter.OnInteractionListener
 import ru.netology.nmedia.adapter.PostAdapter
-import ru.netology.nmedia.databinding.ActivityEditPostBinding
-import ru.netology.nmedia.databinding.ActivityMainBinding
-import ru.netology.nmedia.databinding.ActivityNewPostBinding
+import ru.netology.nmedia.databinding.FragmentFeedBinding
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.viewmodel.PostViewModel
 
-var editText = ""
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val binding = ActivityMainBinding.inflate(layoutInflater)
-        val bindingPost = ActivityEditPostBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        val viewModel: PostViewModel by viewModels()
+class FeedFragment : Fragment() {
+    private val viewModel: PostViewModel by viewModels(
+        ownerProducer = ::requireParentFragment
+    )
 
-        //регистрируем контракт? 2-й аргумент - обработчик полученного результата(текста поста)
-        val activityLauncher = registerForActivityResult(NewPostActivity.Contract) {text ->
-            text ?: return@registerForActivityResult
-            viewModel.changeContent(text)
-            viewModel.save()
-        }
-
-        val editLauncher = registerForActivityResult(EditPostActivity.ContractEdit) {text ->
-            text ?: return@registerForActivityResult
-            viewModel.changeContent(text)
-            viewModel.save()
-        }
-        //по нажатию на кнопку add
-        binding.add.setOnClickListener {
-            //вызываем контракт по переменной activityLauncher
-            activityLauncher.launch()
-        }
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        val binding = FragmentFeedBinding.inflate(
+            inflater,
+            container,
+            false
+        )
 
         //создаем адаптер
         val adapter = PostAdapter(object : OnInteractionListener {
+            override fun openPost(post: Post) {
+                findNavController().navigate(R.id.action_feedFragment_to_viewPostFragment, ViewPostFragment.Companion.createArguments(post))
+                //viewModel.edit(post)
+            }
 
             override fun edit(post: Post) {
+                //передаем текущий текст поста
+                findNavController().navigate(R.id.action_feedFragment_to_editPostFragment, EditPostFragment.Companion.createArguments(post.content))
                 viewModel.edit(post)
-                //запуск активити с интентом по текущему контенту
-                editLauncher.launch(post.content)
-
             }
 
             override fun remove(post: Post) {
@@ -87,22 +82,16 @@ class MainActivity : AppCompatActivity() {
             }
         })
         binding.lists.adapter = adapter
-        viewModel.data.observe(this) {posts ->
+        viewModel.data.observe(viewLifecycleOwner) {posts ->
             adapter.submitList(posts)
         }
-
-
-        //нужно сфокусироваться на поле ввода
-        viewModel.edited.observe(this) {
-            if (it.id == 0L) {
-                return@observe
-            }
-            with(bindingPost.contentEdit) {
-                setText(it.content)
-                requestFocus()
-            }
-
+        binding.add.setOnClickListener{
+            findNavController().navigate(R.id.action_feedFragment_to_newPostFragment)
         }
+
+        //возвращаем экземпляр view
+        return binding.root
+
     }
 
 }

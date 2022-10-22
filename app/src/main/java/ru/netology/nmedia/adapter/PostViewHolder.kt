@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.constraintlayout.widget.Group
 import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.R
-import ru.netology.nmedia.databinding.ActivityMainBinding
 import ru.netology.nmedia.databinding.CardPostBinding
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.repository.PostRepositoryInMemoryImpl
@@ -20,6 +20,7 @@ interface OnInteractionListener {
     fun remove(post: Post)
     fun share(post: Post)
     fun openVideo(post: Post)
+    fun openPost(post: Post)
 
 }
 
@@ -72,6 +73,9 @@ class PostViewHolder(
 
                     }
                 }.show()
+            }
+            content.setOnClickListener {
+                listener.openPost(post)
             }
 
         }
